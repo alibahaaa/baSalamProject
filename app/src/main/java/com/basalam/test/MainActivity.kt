@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
+
         viewModel.getResponse()
         viewModel.myResponse.observe(this, Observer { response ->
 
