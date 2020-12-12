@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity() {
                 response.body()?.let { myAdapter.setData(it) }
             } else {
                 Log.d("ResponseOfPro", response.errorBody().toString());
-
             }
         })
 
