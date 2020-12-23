@@ -11,9 +11,11 @@ import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_layout.view.*
 
+interface CellClickListener {
+    fun onCellClickListener(data: Data,pos:Int,view:View)
+}
 
-
-class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MyAdapter( private val cellClickListener: CellClickListener) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     private var myData = Data()
 
@@ -30,9 +32,14 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+
+        holder.itemView.setOnClickListener {
+            cellClickListener.onCellClickListener(myData,position,holder.itemView)
+        }
+
         holder.itemView.text_row.text = myData[position].title
+
         val url = myData[position].thumbnailUrl + ".PNG";
-        Log.d("IMAGES", url)
         Picasso.get().load(url).into(holder.itemView.image_row)
 
 //        Glide.with(holder.itemView.context)
